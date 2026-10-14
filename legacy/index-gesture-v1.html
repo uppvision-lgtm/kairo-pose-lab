@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080e12" />
+  <meta name="description" content="KAIRO — kendalikan robot raksasa dengan gerakan tubuh. Duel, kombo, dan upgrade dalam arena 3D lokal." />
+  <title>KAIRO — Neural Combat</title>
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+</head>
+<body>
+  <div id="app">
+    <div id="arena" aria-label="Arena robot tiga dimensi"></div>
+    <div class="vignette"></div><div class="scanlines"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Kairo beranda"><span class="brand-icon">K</span><span>KAIRO<small>NEURAL COMBAT</small></span></a>
+      <nav aria-label="Menu utama"><button class="nav-item active" id="nav-deploy">DEPLOY</button><button class="nav-item" id="nav-garage">GARASI <span>03</span></button><button class="nav-item" id="nav-guide">PANDUAN <span>↗</span></button></nav>
+      <div class="header-right"><span class="local-badge"><i></i> LOCAL SYSTEM</span><button class="sound-button" id="sound-btn" aria-label="Aktifkan suara" title="Aktifkan suara">SFX OFF</button><div class="pilot-badge">P<span>01</span></div></div>
+    </header>
+
+    <main id="home" class="home">
+      <section class="hero-copy">
+        <p class="eyebrow"><span></span> NEURAL LINK PROTOCOL / V.01</p>
+        <h1>YOUR MOVE.<br>GIANT <em>IMPACT.</em></h1>
+        <p class="hero-description">Tubuhmu adalah kendalinya.<br>Masuk ke arena. Bangun mesin perangmu.</p>
+        <div class="hero-actions"><button id="deploy-btn" class="button primary">MULAI DUEL <span>↗</span></button><button id="training-btn" class="button secondary">RUANG LATIHAN <span>→</span></button></div>
+        <p class="input-note"><span class="key-mini">J</span><span class="key-mini">K</span> Keyboard siap <b>·</b> Kamera opsional</p>
+        <div class="pilot-stats"><div><b id="home-wins">00</b><span>KEMENANGAN</span></div><div><b id="home-best">00</b><span>BEST COMBO</span></div><div><b id="home-credits">0</b><span>KREDIT</span></div></div>
+      </section>
+
+      <div class="mech-label"><span class="crosshair">＋</span><div>ATLAS–01<small>VANGUARD CLASS / YOUR MECH</small></div><span class="label-line"></span></div>
+
+      <aside class="link-panel glass">
+        <div class="panel-heading"><span><i class="status-dot" id="camera-dot"></i> PILOT LINK</span><span class="tiny" id="camera-badge">STANDBY</span></div>
+        <div class="camera-view" id="camera-view"><video id="webcam" playsinline muted></video><canvas id="pose-overlay"></canvas><div class="camera-placeholder" id="camera-placeholder"><svg viewBox="0 0 100 90" aria-hidden="true"><circle cx="50" cy="23" r="11"/><path d="M27 74V55q0-17 23-17t23 17v19M34 51l-8 11M66 51l8 11M12 25V12h15M73 12h15v13M12 65v13h15M73 78h15V65"/></svg><span>SEATED PILOT DETECTION</span></div><div class="camera-corners"></div><span class="camera-live" id="camera-live">CAM OFF</span></div>
+        <p class="camera-message" id="camera-message">Hubungkan gerakan tubuhmu ke robot.</p>
+        <button id="camera-btn" class="button camera-button">AKTIFKAN KAMERA <span>◎</span></button>
+        <button id="calibrate-btn" class="text-button" hidden>Kalibrasi ulang</button>
+        <div class="privacy-note"><span>◈</span> Diproses lokal. Video tidak disimpan.</div>
+      </aside>
+
+      <section class="bottom-deck">
+        <button class="sector-card" id="sector-btn"><div class="sector-art"><span>07</span><svg viewBox="0 0 160 80" aria-hidden="true"><path d="M0 68h160M15 68V35h24v33M48 68V10h5v58M49 14h62l-30 9H49M107 68V30h25v38M83 68V47h17v21M9 58h140M20 35l8-15 9 15"/></svg></div><div><span class="tiny orange">COMBAT ZONE / 01</span><h3>IRON HARBOR</h3><p>Pelabuhan industri · Malam / Hujan</p></div><span class="card-arrow">↗</span></button>
+        <div class="loadout-card"><div class="loadout-icon">⌁</div><div><span class="tiny">ACTIVE LOADOUT</span><h3 id="home-weapon">STEEL FISTS</h3><p id="home-weapon-desc">Cepat. Presisi. Tanpa kompromi.</p></div><button id="loadout-btn" class="small-button">GANTI <span>→</span></button></div>
+        <div class="system-card"><span class="tiny">REACTOR STATUS</span><div><i></i><strong>ALL SYSTEMS READY</strong></div><p>ATLAS ONLINE <span id="fps">60 FPS</span></p></div>
+      </section>
+      <footer class="home-footer"><span>01 / PROTOTYPE BUILD</span><span>ONE PILOT. ONE MACHINE. NO LIMITS.</span><span>LOCALHOST EDITION ↗</span></footer>
+    </main>
+
+    <section id="combat" class="combat" hidden aria-label="Pertarungan">
+      <div class="combat-top"><div class="fighter-status"><div class="fighter-title"><span>ATLAS–01 <small>YOU</small></span><b id="player-hp-text">100</b></div><div class="health-track"><div id="player-hp"></div></div><div class="energy-track"><div id="player-energy"></div></div><div class="status-caption"><span id="combat-weapon">STEEL FISTS</span><span id="energy-label">ENERGY 100</span></div></div><div class="round-clock"><span id="round-mode">DUEL / 01</span><b id="round-time">02:00</b><small id="round-state">TARGET LOCKED</small></div><div class="fighter-status enemy-status"><div class="fighter-title"><span id="enemy-name">REVENANT–07</span><b id="enemy-hp-text">180</b></div><div class="health-track"><div id="enemy-hp"></div></div><div class="armor-track"><div id="enemy-armor"></div></div><div class="status-caption"><span>HOSTILE MECH</span><span id="armor-label">ARMOR 100%</span></div></div></div>
+      <div class="combat-callout" id="combat-callout"><small id="callout-caption"></small><strong id="callout-text"></strong></div>
+      <div class="combo-display" id="combo-display"><b id="combo-count">0</b><span>HIT COMBO</span><small id="combo-name"></small></div>
+      <div class="enemy-warning" id="enemy-warning" hidden><i>!</i><span id="warning-text">SERANGAN MASUK — TANGKIS ATAU DASH</span></div>
+      <div class="combat-bottom"><button id="pause-btn" class="small-button">Ⅱ JEDA <kbd>Esc</kbd></button><div class="control-strip"><span><kbd>J</kbd> KIRI</span><span><kbd>K</kbd> KANAN</span><span><kbd>L</kbd> SPESIAL</span><span><kbd>Space</kbd> TANGKIS</span><span><kbd>A</kbd><kbd>D</kbd> DASH</span><span><kbd>O</kbd> OVERDRIVE</span></div><div class="overdrive-meter"><span id="overdrive-label">OVERDRIVE / 0%</span><div><i id="overdrive-fill"></i></div></div></div>
+      <div id="combat-camera-status" class="combat-camera-status">KEYBOARD CONTROL · J / K UNTUK MENYERANG</div>
+      <div class="touch-controls"><button data-action="left">KIRI</button><button data-action="right">KANAN</button><button data-action="special">SPESIAL</button><button id="touch-block">TANGKIS</button><button data-action="dodgeLeft">← DASH</button><button data-action="dodgeRight">DASH →</button><button data-action="overdrive">OVERDRIVE</button></div>
+    </section>
+
+    <dialog id="garage-dialog" class="modal garage-modal"><div class="modal-top"><div><p class="eyebrow">ATLAS–01 / ENGINEERING BAY</p><h2>BUILD YOUR <em>EDGE.</em></h2></div><button class="close-button" data-close aria-label="Tutup garasi">×</button></div><div class="garage-summary"><span>LOADOUT & UPGRADE</span><b><span id="garage-credits">0</span> <small>CR</small></b></div><div id="weapon-list" class="weapon-list"></div><div class="upgrade-heading"><h3>CORE SYSTEMS</h3><span>Upgrade permanen · Maks. level 5</span></div><div id="upgrade-list" class="upgrade-list"></div><p class="modal-footnote">Kredit diperoleh dari duel. Progres tersimpan otomatis di browser ini.</p></dialog>
+
+    <dialog id="guide-dialog" class="modal guide-modal"><div class="modal-top"><div><p class="eyebrow">PILOT FIELD MANUAL</p><h2>MAKE YOUR <em>MOVE.</em></h2></div><button class="close-button" data-close aria-label="Tutup panduan">×</button></div><div class="guide-intro">Duduk nyaman. Pastikan kepala, bahu, siku, dan tangan terlihat. Mulai dari ruang latihan untuk menemukan ritmemu.</div><div class="guide-grid"><article><span>01 / STRIKE</span><h3>Bangun kombo.</h3><p>Dorong tangan pendek secara bergantian. Keyboard: <kbd>J</kbd> kiri, <kbd>K</kbd> kanan. Sambung serangan dalam 1,6 detik.</p></article><article><span>02 / DEFEND</span><h3>Baca lawan.</h3><p>Angkat kedua tangan dekat wajah untuk menangkis. Keyboard: tahan <kbd>Space</kbd>. Tangkisan tepat waktu memicu parry.</p></article><article><span>03 / EVADE</span><h3>Jangan diam.</h3><p>Miringkan badan sedikit ke kiri/kanan untuk dash. Keyboard: <kbd>A</kbd> / <kbd>D</kbd>. Dash memakai energi.</p></article><article><span>04 / BREAK</span><h3>Lepaskan tenaga.</h3><p>Ayunkan satu tangan ke atas untuk spesial, atau tekan <kbd>L</kbd>. Isi meter lewat serangan, lalu tekan <kbd>O</kbd> untuk Overdrive.</p></article></div><div class="guide-tip">TIP / Latihan tidak memberi kredit. Pecahkan armor lawan untuk meningkatkan damage. Meriam dan pedang punya serangan spesial berbeda.</div><button id="guide-training" class="button primary">COBA DI RUANG LATIHAN <span>→</span></button></dialog>
+
+    <dialog id="pause-dialog" class="modal compact-modal"><p class="eyebrow">SYSTEM ON HOLD</p><h2>AMBIL <em>NAPAS.</em></h2><p>Pertarungan dijeda. Siap untuk kembali?</p><button id="resume-btn" class="button primary">LANJUTKAN <span>→</span></button><button id="exit-btn" class="button secondary">KEMBALI KE HANGAR</button></dialog>
+    <dialog id="result-dialog" class="modal compact-modal"><p class="eyebrow" id="result-eyebrow">MISSION COMPLETE</p><h2 id="result-title">VICTORY.</h2><p id="result-description"></p><div class="result-stats"><div><span>KREDIT</span><b id="result-reward">+250</b></div><div><span>BEST COMBO</span><b id="result-combo">0</b></div></div><button id="rematch-btn" class="button primary">DUEL LAGI <span>↗</span></button><button id="result-garage-btn" class="button secondary">KEMBALI & UPGRADE</button></dialog>
+    <div id="toast" role="status" class="toast"></div>
+    <div id="loading" class="loading"><span class="brand-icon">K</span><p>INITIALIZING ATLAS</p><i></i></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

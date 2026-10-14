@@ -1,0 +1,19 @@
+{
+  "name": "kairo-neural-combat",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5188 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "latest",
+    "three": "latest"
+  },
+  "devDependencies": {
+    "vite": "latest"
+  }
+}
